@@ -788,13 +788,28 @@ canvas {
     }
 
     .letter {
-        width: 92%;
-        height: 88%;
-        top: 6%;
-        border-radius: 6px;
-        background-color: #FFF2EB;
-        box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
-    }
+        .letter {
+  position: relative;
+  background-color: #FFF2EB;
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  top: 5%;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+  font-family: "Dancing Script", cursive;
+
+  overflow: hidden; /* Khi đóng thì ẩn phần tràn ra */
+  transition: all 0.4s ease;
+}
+/* Khi mở thì cho phép cuộn nội dung */
+.open .letter {
+  overflow-y: auto !important;
+  transform: translateY(-180px);
+  transition: transform 0.6s ease-in-out, z-index 0.6s;
+  z-index: 2;
+}
+
 
     .words {
         font-size: 0.8rem; /* Optimized for 460 ppi */
