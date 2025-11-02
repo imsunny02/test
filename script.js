@@ -450,52 +450,44 @@ window.addEventListener("resize", function () {
     ctx.font = opts.charSize + "px Verdana";
 });
 
-//letter section
-
+// letter section
 document.querySelector('.btn').addEventListener('click', function() {
-    document.getElementById('page2').style.display = 'none';
-    document.getElementById('page3').style.display = 'block';
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page3').style.display = 'block';
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const envelope = document.getElementById('envelope');
-    const btnOpen = document.getElementById('open');
-    const btnReset = document.getElementById('reset');
+  const envelope = document.getElementById('envelope');
+  const letter = envelope.querySelector('.letter');
+  const btnOpen = document.getElementById('open');
+  const btnReset = document.getElementById('reset');
 
-    function open() {
-        envelope.classList.add('open');
-        envelope.classList.remove('close');
+  function openEnvelope() {
+    envelope.classList.add('open');
+    envelope.classList.remove('close');
+    updateLetterTransform(); // gọi ngay để thư trượt lên liền
+  }
+
+  function closeEnvelope() {
+    envelope.classList.add('close');
+    envelope.classList.remove('open');
+    letter.style.transform = 'translateY(0px)'; // trả thư về lại vị trí ban đầu
+  }
+
+  function updateLetterTransform() {
+    const viewportHeight = window.innerHeight;
+    const translateY = Math.min(-250, -(viewportHeight * 0.4));
+    if (envelope.classList.contains('open')) {
+      letter.style.transform = `translateY(${translateY}px)`;
     }
+  }
 
-    function close() {
-        envelope.classList.add('close');
-        envelope.classList.remove('open');
-    }
+  // Bắt sự kiện các nút
+  envelope.addEventListener('click', openEnvelope);
+  btnOpen.addEventListener('click', openEnvelope);
+  btnReset.addEventListener('click', closeEnvelope);
 
-    envelope.addEventListener('click', open);
-    btnOpen.addEventListener('click', open);
-    btnReset.addEventListener('click', close);
+  // Cập nhật khi resize hoặc xoay màn hình
+  window.addEventListener('resize', updateLetterTransform);
+  window.addEventListener('orientationchange', updateLetterTransform);
 });
-// Thêm vào file script.js
-function adjustLetterPosition() {
-    const envelope = document.getElementById('envelope');
-    const letter = envelope.querySelector('.letter');
-    
-    // Điều chỉnh vị trí letter dựa trên kích thước màn hình
-    function updateLetterTransform() {
-        const viewportHeight = window.innerHeight;
-        const envelopeRect = envelope.getBoundingClientRect();
-        const translateY = Math.min(-250, -(viewportHeight * 0.4));
-        
-        if (envelope.classList.contains('open')) {
-            letter.style.transform = `translateY(${translateY}px)`;
-        }
-    }
-
-    // Cập nhật khi resize và rotate màn hình
-    window.addEventListener('resize', updateLetterTransform);
-    window.addEventListener('orientationchange', updateLetterTransform);
-}
-
-// Gọi function khi document ready
-document.addEventListener('DOMContentLoaded', adjustLetterPosition);
