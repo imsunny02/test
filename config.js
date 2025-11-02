@@ -10,6 +10,9 @@ Chúc bé iu của anh sinh nhật vui vẻ và mọi điều tốt lành sẽ �
 
   // Ảnh ở màn hình đăng nhập (page 1)
   passwordImage: "./image/a1.jpg",
+
+   // Mật khẩu riêng của người nhận
+  password: "iloveyou", 
   
   // Lời nhắn alert khi nhập sai mật khẩu
   wrongPasswordAlert: "NÀO NÀO CHẲNG LẺ MÂT KHẨU KHÔNG NHỚ SAO"
