@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         pwImage.src = config.passwordImage;
     }
 
-    // 2. Thay lời chào trong thư (VD: Gửi Đức Duy của em ♥️,)
+    // 2. Thay lời chào trong thư (VD: Gửi Đức Duy ♥️,)
     const letterRecipient = document.getElementById('letter-recipient');
     if (letterRecipient) {
         // Bạn có thể sửa "của em" ở đây nếu muốn
@@ -29,7 +29,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const page2 = document.getElementById('page2');
     const audio = document.querySelector('audio');
     
-    if (password === 'iloveyou') {
+    if (password === config.password) {
         audio.muted = false;
         audio.play().catch(error => console.log('Playback error:', error));
         page1.style.display = 'none';
@@ -491,3 +491,4 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updateLetterTransform);
   window.addEventListener('orientationchange', updateLetterTransform);
 });
+
