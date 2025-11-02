@@ -583,11 +583,27 @@ canvas {
     transition: transform 0.4s ease, z-index 1s;
     z-index: 1;
 }
+/* Hiệu ứng thư mở — tự điều chỉnh theo kích thước màn hình */
 .open .letter {
-  transform: translateY(-170px);
   transition: transform 0.6s ease-in-out, z-index 0.6s;
   z-index: 2;
 }
+
+/* Mặc định trên màn hình lớn (PC, tablet ngang) */
+@media (min-width: 769px) {
+  .open .letter { transform: translateY(-250px); }
+}
+
+/* Điện thoại lớn */
+@media (max-width: 768px) {
+  .open .letter { transform: translateY(-180px); }
+}
+
+/* Điện thoại nhỏ */
+@media (max-width: 430px) {
+  .open .letter { transform: translateY(-140px); }
+}
+
 
 .hearts {
     position: absolute;
