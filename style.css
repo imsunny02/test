@@ -354,37 +354,18 @@ canvas {
     border-bottom-right-radius: 6px;
 }
 
-/* --- Fix thư bị lòi và thêm thanh cuộn khi mở --- */
 .letter {
-  position: relative;
-  background-color: #FFF2EB;
-  width: 90%;
-  height: 90%;
-  margin: auto;
-  top: 5%;
-  border-radius: 6px;
-  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
-  font-family: "Dancing Script", cursive;
-
-  overflow: hidden; /* Khi đóng thì ẩn phần tràn ra */
-  transition: all 0.4s ease;
-}
-
-/* Khi mở thì cho phép cuộn nội dung bên trong */
-
-
-/* Tùy chỉnh giao diện thanh cuộn cho đẹp */
-.open .letter::-webkit-scrollbar {
-  width: 6px;
-}
-
-.open .letter::-webkit-scrollbar-thumb {
-  background-color: #E50046;
-  border-radius: 10px;
-}
-
-.open .letter::-webkit-scrollbar-track {
-  background-color: #FFD6BA;
+    position: relative;
+    background-color: #FFF2EB;
+    width: 90%;
+    max-height: 480px; /* <-- Đặt chiều cao tối đa (bạn có thể sửa số 480) */
+    overflow-y: auto;  /* <-- Tự động thêm thanh cuộn khi cần */
+    margin: auto;
+    top: 5%;
+    border-radius: 6px;
+    box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+    font-family: "Dancing Script", cursive;
+    overflow: hidden; /* <-- Thêm dòng này */
 }
 
 .letter:after {
@@ -566,6 +547,62 @@ canvas {
         margin-top: 10px;
     }
 }
+/* --- Fix thư bị lòi và thêm thanh cuộn khi mở --- */
+.letter {
+  position: relative;
+  background-color: #FFF2EB;
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  top: 5%;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+  font-family: "Dancing Script", cursive;
+
+  overflow: hidden; /* Khi đóng thì ẩn phần tràn ra */
+  transition: all 0.4s ease;
+}
+
+/* Khi mở thì cho phép cuộn nội dung bên trong và transform để trượt thư lên */
+.open .letter {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  transition: transform 0.6s ease-in-out, z-index 0.6s;
+  z-index: 2;
+}
+
+/* Tùy chỉnh giao diện thanh cuộn cho đẹp */
+.open .letter::-webkit-scrollbar {
+  width: 6px;
+}
+
+.open .letter::-webkit-scrollbar-thumb {
+  background-color: #E50046;
+  border-radius: 10px;
+}
+
+.open .letter::-webkit-scrollbar-track {
+  background-color: #FFD6BA;
+}
+
+/* Responsive transform: khác nhau theo kích thước màn hình */
+@media (min-width: 769px) {
+  .open .letter { transform: translateY(-250px); }
+}
+@media (max-width: 768px) {
+  .open .letter { transform: translateY(-180px); }
+}
+@media (max-width: 430px) {
+  .open .letter { transform: translateY(-140px); }
+}
+
+/* đảm bảo khi đóng trả lại vị trí ban đầu */
+.close .letter {
+  transform: translateY(0px);
+  transition: transform 0.4s ease, z-index 1s;
+  z-index: 1;
+}
+
 .open .flap {
     transform: rotateX(180deg);
     transition: transform 0.4s ease, z-index 0.6s;
@@ -583,27 +620,12 @@ canvas {
     transition: transform 0.4s ease, z-index 1s;
     z-index: 1;
 }
-/* Hiệu ứng thư mở — tự điều chỉnh theo kích thước màn hình */
+
 .open .letter {
-  transition: transform 0.6s ease-in-out, z-index 0.6s;
-  z-index: 2;
+    transform: translateY(-250px);
+    transition: transform 0.4s 0.6s ease, z-index 0.6s;
+    z-index: 2;
 }
-
-/* Mặc định trên màn hình lớn (PC, tablet ngang) */
-@media (min-width: 769px) {
-  .open .letter { transform: translateY(-250px); }
-}
-
-/* Điện thoại lớn */
-@media (max-width: 768px) {
-  .open .letter { transform: translateY(-180px); }
-}
-
-/* Điện thoại nhỏ */
-@media (max-width: 430px) {
-  .open .letter { transform: translateY(-140px); }
-}
-
 
 .hearts {
     position: absolute;
@@ -788,28 +810,13 @@ canvas {
     }
 
     .letter {
-        .letter {
-  position: relative;
-  background-color: #FFF2EB;
-  width: 90%;
-  height: 90%;
-  margin: auto;
-  top: 5%;
-  border-radius: 6px;
-  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
-  font-family: "Dancing Script", cursive;
-
-  overflow: hidden; /* Khi đóng thì ẩn phần tràn ra */
-  transition: all 0.4s ease;
-}
-/* Khi mở thì cho phép cuộn nội dung */
-.open .letter {
-  overflow-y: auto !important;
-  transform: translateY(-180px);
-  transition: transform 0.6s ease-in-out, z-index 0.6s;
-  z-index: 2;
-}
-
+        width: 92%;
+        height: 88%;
+        top: 6%;
+        border-radius: 6px;
+        background-color: #FFF2EB;
+        box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+    }
 
     .words {
         font-size: 0.8rem; /* Optimized for 460 ppi */
