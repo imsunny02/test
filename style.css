@@ -587,13 +587,15 @@ canvas {
 
 /* Responsive transform: khác nhau theo kích thước màn hình */
 @media (min-width: 769px) {
-  .open .letter { transform: translateY(-200px); }
+  .open .letter { transform: translateY(-200px) !important; }
 }
+
 @media (max-width: 768px) {
-  .open .letter { transform: translateY(-120px); }
+  .open .letter { transform: translateY(-120px) !important; }
 }
+
 @media (max-width: 430px) {
-  .open .letter { transform: translateY(-100px); }
+  .open .letter { transform: translateY(-100px) !important; }
 }
 
 /* đảm bảo khi đóng trả lại vị trí ban đầu */
