@@ -591,11 +591,11 @@ canvas {
 }
 
 @media (max-width: 768px) {
-  .open .letter { transform: translateY(-120px) !important; }
+  .open .letter { transform: translateY(-150px) !important; }
 }
 
 @media (max-width: 430px) {
-  .open .letter { transform: translateY(-100px) !important; }
+  .open .letter { transform: translateY(-140px) !important; }
 }
 
 /* đảm bảo khi đóng trả lại vị trí ban đầu */
